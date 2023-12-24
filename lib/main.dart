@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:rent_mobileapps/pages/DashboardPage.dart';
 import 'package:rent_mobileapps/pages/LoginPage.dart';
 import 'package:rent_mobileapps/pages/SignupPage.dart';
 
@@ -22,7 +23,8 @@ class MyApp extends StatelessWidget {
       ),
       title: 'Flutter Demo',
       // home: LoginPage(),
-      home: SignupPage(),
+      // home: SignupPage(),
+      home: DashboardPage(),
     );
   }
 }
