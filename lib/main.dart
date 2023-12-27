@@ -7,6 +7,7 @@ import 'package:rent_mobileapps/pages/LoginPage.dart';
 import 'package:rent_mobileapps/pages/SignupPage.dart';
 import 'package:rent_mobileapps/pages/DetailStudioPage.dart';
 import 'package:rent_mobileapps/pages/ReviewPage.dart';
+import 'package:rent_mobileapps/pages/CreateReviewPage.dart';
 
 void main() {
   runApp(MyApp());
@@ -19,21 +20,21 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      theme: ThemeData(
-        textTheme: GoogleFonts.poppinsTextTheme(
-          Theme.of(context).textTheme,
+        debugShowCheckedModeBanner: false,
+        theme: ThemeData(
+          textTheme: GoogleFonts.poppinsTextTheme(
+            Theme.of(context).textTheme,
+          ),
         ),
-      ),
-      title: 'Flutter Demo',
-      // home: LoginPage(),
-      // home: SignupPage(),
-      // home: DashboardPage(),
-      // home: DetailStudioPage(),
-      // home: BookingPage(),
-      // home: HistoryPage(),
-      home: ReviewPage(),
-    );
+        title: 'Flutter Demo',
+        // home: LoginPage(),
+        // home: SignupPage(),
+        // home: DashboardPage(),
+        // home: DetailStudioPage(),
+        // home: BookingPage(),
+        // home: HistoryPage(),
+        // home: ReviewPage(),
+        home: CreateReviewPage());
   }
 }
 
