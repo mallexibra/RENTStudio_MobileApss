@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:rent_mobileapps/pages/BookingPage.dart';
 import 'package:rent_mobileapps/pages/DashboardPage.dart';
 import 'package:rent_mobileapps/pages/LoginPage.dart';
 import 'package:rent_mobileapps/pages/SignupPage.dart';
@@ -26,7 +27,8 @@ class MyApp extends StatelessWidget {
       // home: LoginPage(),
       // home: SignupPage(),
       // home: DashboardPage(),
-      home: DetailStudioPage(),
+      // home: DetailStudioPage(),
+      home: BookingPage(),
     );
   }
 }
