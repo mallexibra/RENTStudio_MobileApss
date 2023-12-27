@@ -153,16 +153,15 @@ class _DashboardPageState extends State<DashboardPage> {
                             Row(
                               children: [
                                 Icon(
-                                  Icons.star_rate_rounded,
-                                  color: Colors.amber,
+                                  Icons.location_on_sharp,
                                   size: 18,
                                 ),
                                 Text(
-                                  "4",
+                                  "Kab. Banyuwangi",
                                   style: TextStyle(fontWeight: FontWeight.bold),
                                 )
                               ],
-                            )
+                            ),
                           ],
                         ),
                         Text("Keren banget studionya bro..."),
