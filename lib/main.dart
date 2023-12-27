@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:rent_mobileapps/pages/BookingPage.dart';
 import 'package:rent_mobileapps/pages/DashboardPage.dart';
+import 'package:rent_mobileapps/pages/HistoryPage.dart';
 import 'package:rent_mobileapps/pages/LoginPage.dart';
 import 'package:rent_mobileapps/pages/SignupPage.dart';
 import 'package:rent_mobileapps/pages/DetailStudioPage.dart';
@@ -28,7 +29,8 @@ class MyApp extends StatelessWidget {
       // home: SignupPage(),
       // home: DashboardPage(),
       // home: DetailStudioPage(),
-      home: BookingPage(),
+      // home: BookingPage(),
+      home: HistoryPage(),
     );
   }
 }
