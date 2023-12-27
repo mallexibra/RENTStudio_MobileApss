@@ -6,6 +6,7 @@ import 'package:rent_mobileapps/pages/HistoryPage.dart';
 import 'package:rent_mobileapps/pages/LoginPage.dart';
 import 'package:rent_mobileapps/pages/SignupPage.dart';
 import 'package:rent_mobileapps/pages/DetailStudioPage.dart';
+import 'package:rent_mobileapps/pages/ReviewPage.dart';
 
 void main() {
   runApp(MyApp());
@@ -30,7 +31,8 @@ class MyApp extends StatelessWidget {
       // home: DashboardPage(),
       // home: DetailStudioPage(),
       // home: BookingPage(),
-      home: HistoryPage(),
+      // home: HistoryPage(),
+      home: ReviewPage(),
     );
   }
 }
