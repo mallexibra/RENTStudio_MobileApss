@@ -113,160 +113,164 @@ class _DashboardPageState extends State<DashboardPage> {
             SizedBox(
               height: 12,
             ),
-            SingleChildScrollView(
-              child: Column(
-                children: [
-                  Container(
-                    width: double.maxFinite,
-                    padding: EdgeInsets.all(8),
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(10),
-                      border: Border.all(width: 2, color: Colors.deepPurple),
-                    ),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Container(
-                          width: double.maxFinite,
-                          height: 178,
-                          child: ClipRRect(
-                            borderRadius: BorderRadius.circular(10),
-                            child: Image.network(
-                              "https://images.unsplash.com/photo-1702933018110-883638b70eeb?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-                              fit: BoxFit.cover,
-                            ),
-                          ),
-                        ),
-                        SizedBox(
-                          height: 8,
-                        ),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Text(
-                              "RENT Studio",
-                              style: TextStyle(
-                                  fontSize: 22,
-                                  fontWeight: FontWeight.bold,
-                                  color: Colors.deepPurple),
-                            ),
-                            Row(
-                              children: [
-                                Icon(
-                                  Icons.location_on_sharp,
-                                  size: 18,
-                                ),
-                                Text(
-                                  "Kab. Banyuwangi",
-                                  style: TextStyle(fontWeight: FontWeight.bold),
-                                )
-                              ],
-                            ),
-                          ],
-                        ),
-                        Text("Keren banget studionya bro..."),
-                        SizedBox(
-                          height: 12,
-                        ),
-                        GestureDetector(
-                          onTap: () {
-                            print("Hello");
-                          },
-                          child: Container(
+            Expanded(
+              child: SingleChildScrollView(
+                child: Column(
+                  children: [
+                    Container(
+                      width: double.maxFinite,
+                      padding: EdgeInsets.all(8),
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(10),
+                        border: Border.all(width: 2, color: Colors.deepPurple),
+                      ),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Container(
                             width: double.maxFinite,
-                            padding: EdgeInsets.all(8),
-                            decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(10),
-                                color: Colors.deepPurple),
-                            child: Text("Lihat Detail Studio",
-                                style: TextStyle(
-                                    color: Colors.white,
-                                    fontWeight: FontWeight.w700),
-                                textAlign: TextAlign.center),
-                          ),
-                        )
-                      ],
-                    ),
-                  ),
-                  SizedBox(
-                    height: 12,
-                  ),
-                  Container(
-                    width: double.maxFinite,
-                    padding: EdgeInsets.all(8),
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(10),
-                      border: Border.all(width: 2, color: Colors.deepPurple),
-                    ),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Container(
-                          width: double.maxFinite,
-                          height: 178,
-                          child: ClipRRect(
-                            borderRadius: BorderRadius.circular(10),
-                            child: Image.network(
-                              "https://images.unsplash.com/photo-1702933018110-883638b70eeb?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-                              fit: BoxFit.cover,
+                            height: 178,
+                            child: ClipRRect(
+                              borderRadius: BorderRadius.circular(10),
+                              child: Image.network(
+                                "https://images.unsplash.com/photo-1702933018110-883638b70eeb?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+                                fit: BoxFit.cover,
+                              ),
                             ),
                           ),
-                        ),
-                        SizedBox(
-                          height: 8,
-                        ),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Text(
-                              "RENT Studio",
-                              style: TextStyle(
-                                  fontSize: 22,
-                                  fontWeight: FontWeight.bold,
+                          SizedBox(
+                            height: 8,
+                          ),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Text(
+                                "RENT Studio",
+                                style: TextStyle(
+                                    fontSize: 22,
+                                    fontWeight: FontWeight.bold,
+                                    color: Colors.deepPurple),
+                              ),
+                              Row(
+                                children: [
+                                  Icon(
+                                    Icons.location_on_sharp,
+                                    size: 18,
+                                  ),
+                                  Text(
+                                    "Kab. Banyuwangi",
+                                    style:
+                                        TextStyle(fontWeight: FontWeight.bold),
+                                  )
+                                ],
+                              ),
+                            ],
+                          ),
+                          Text("Keren banget studionya bro..."),
+                          SizedBox(
+                            height: 12,
+                          ),
+                          GestureDetector(
+                            onTap: () {
+                              print("Hello");
+                            },
+                            child: Container(
+                              width: double.maxFinite,
+                              padding: EdgeInsets.all(8),
+                              decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(10),
                                   color: Colors.deepPurple),
+                              child: Text("Lihat Detail Studio",
+                                  style: TextStyle(
+                                      color: Colors.white,
+                                      fontWeight: FontWeight.w700),
+                                  textAlign: TextAlign.center),
                             ),
-                            Row(
-                              children: [
-                                Icon(
-                                  Icons.star_rate_rounded,
-                                  color: Colors.amber,
-                                  size: 18,
-                                ),
-                                Text(
-                                  "4",
-                                  style: TextStyle(fontWeight: FontWeight.bold),
-                                )
-                              ],
-                            )
-                          ],
-                        ),
-                        Text("Keren banget studionya bro..."),
-                        SizedBox(
-                          height: 12,
-                        ),
-                        GestureDetector(
-                          onTap: () {
-                            print("Hello");
-                          },
-                          child: Container(
-                            width: double.maxFinite,
-                            padding: EdgeInsets.all(8),
-                            decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(10),
-                                color: Colors.deepPurple),
-                            child: Text("Lihat Detail Studio",
-                                style: TextStyle(
-                                    color: Colors.white,
-                                    fontWeight: FontWeight.w700),
-                                textAlign: TextAlign.center),
-                          ),
-                        )
-                      ],
+                          )
+                        ],
+                      ),
                     ),
-                  )
-                ],
+                    SizedBox(
+                      height: 12,
+                    ),
+                    Container(
+                      width: double.maxFinite,
+                      padding: EdgeInsets.all(8),
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(10),
+                        border: Border.all(width: 2, color: Colors.deepPurple),
+                      ),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Container(
+                            width: double.maxFinite,
+                            height: 178,
+                            child: ClipRRect(
+                              borderRadius: BorderRadius.circular(10),
+                              child: Image.network(
+                                "https://images.unsplash.com/photo-1702933018110-883638b70eeb?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+                                fit: BoxFit.cover,
+                              ),
+                            ),
+                          ),
+                          SizedBox(
+                            height: 8,
+                          ),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Text(
+                                "RENT Studio",
+                                style: TextStyle(
+                                    fontSize: 22,
+                                    fontWeight: FontWeight.bold,
+                                    color: Colors.deepPurple),
+                              ),
+                              Row(
+                                children: [
+                                  Icon(
+                                    Icons.star_rate_rounded,
+                                    color: Colors.amber,
+                                    size: 18,
+                                  ),
+                                  Text(
+                                    "4",
+                                    style:
+                                        TextStyle(fontWeight: FontWeight.bold),
+                                  )
+                                ],
+                              )
+                            ],
+                          ),
+                          Text("Keren banget studionya bro..."),
+                          SizedBox(
+                            height: 12,
+                          ),
+                          GestureDetector(
+                            onTap: () {
+                              print("Hello");
+                            },
+                            child: Container(
+                              width: double.maxFinite,
+                              padding: EdgeInsets.all(8),
+                              decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(10),
+                                  color: Colors.deepPurple),
+                              child: Text("Lihat Detail Studio",
+                                  style: TextStyle(
+                                      color: Colors.white,
+                                      fontWeight: FontWeight.w700),
+                                  textAlign: TextAlign.center),
+                            ),
+                          )
+                        ],
+                      ),
+                    )
+                  ],
+                ),
               ),
-            )
+            ),
           ],
         ),
       ),

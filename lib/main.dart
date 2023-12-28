@@ -36,7 +36,7 @@ class MyApp extends StatelessWidget {
       // home: HistoryPage(),
       // home: ReviewPage(),
       // home: CreateReviewPage()
-      home: EditProfilePage(),
+      // home: EditProfilePage(),
     );
   }
 }

@@ -6,8 +6,9 @@ class Layout extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ListView(
-      children: [Padding(padding: EdgeInsets.all(12), child: child)],
+    return Container(
+      child: Padding(
+          padding: EdgeInsets.only(top: 28, left: 12, right: 12), child: child),
     );
   }
 }
