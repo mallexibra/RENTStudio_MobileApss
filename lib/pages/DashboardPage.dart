@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:rent_mobileapps/components/BarNavigation.dart';
 import 'package:rent_mobileapps/components/Layout.dart';
 
 class DashboardPage extends StatefulWidget {
@@ -274,6 +275,7 @@ class _DashboardPageState extends State<DashboardPage> {
           ],
         ),
       ),
+      bottomNavigationBar: BarNavigation(),
     );
   }
 }

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:rent_mobileapps/components/BarNavigation.dart';
 import 'package:rent_mobileapps/components/Layout.dart';
 
 class ReviewPage extends StatefulWidget {
@@ -81,6 +82,7 @@ class _ReviewPageState extends State<ReviewPage> {
           ))
         ],
       )),
+      bottomNavigationBar: BarNavigation(),
     );
   }
 }

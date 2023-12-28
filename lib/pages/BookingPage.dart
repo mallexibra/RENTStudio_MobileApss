@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:rent_mobileapps/components/Layout.dart';
+import 'package:rent_mobileapps/components/BarNavigation.dart';
 
 class BookingPage extends StatefulWidget {
   const BookingPage({super.key});
@@ -190,6 +191,7 @@ class _BookingPageState extends State<BookingPage> {
           )
         ],
       )),
+      bottomNavigationBar: BarNavigation(),
     );
   }
 }

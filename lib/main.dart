@@ -31,7 +31,7 @@ class MyApp extends StatelessWidget {
       // home: LoginPage(),
       // home: SignupPage(),
       // home: DashboardPage(),
-      // home: DetailStudioPage(),
+      home: DetailStudioPage(),
       // home: BookingPage(),
       // home: HistoryPage(),
       // home: ReviewPage(),

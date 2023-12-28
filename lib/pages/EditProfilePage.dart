@@ -1,5 +1,6 @@
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
+import 'package:rent_mobileapps/components/BarNavigation.dart';
 import 'package:rent_mobileapps/components/Layout.dart';
 
 class EditProfilePage extends StatefulWidget {
@@ -200,6 +201,7 @@ class _EditProfilePageState extends State<EditProfilePage> {
           )
         ],
       )),
+      bottomNavigationBar: BarNavigation(),
     );
   }
 }

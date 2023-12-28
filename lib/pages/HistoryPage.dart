@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:rent_mobileapps/components/BarNavigation.dart';
 import 'package:rent_mobileapps/components/Layout.dart';
 
 class HistoryPage extends StatefulWidget {
@@ -131,6 +132,7 @@ class _HistoryPageState extends State<HistoryPage> {
           ))
         ],
       )),
+      bottomNavigationBar: BarNavigation(),
     );
   }
 }
