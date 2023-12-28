@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:rent_mobileapps/pages/BookingPage.dart';
 import 'package:rent_mobileapps/pages/DashboardPage.dart';
+import 'package:rent_mobileapps/pages/EditProfilePage.dart';
 import 'package:rent_mobileapps/pages/HistoryPage.dart';
 import 'package:rent_mobileapps/pages/LoginPage.dart';
 import 'package:rent_mobileapps/pages/SignupPage.dart';
@@ -20,21 +21,23 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-        debugShowCheckedModeBanner: false,
-        theme: ThemeData(
-          textTheme: GoogleFonts.poppinsTextTheme(
-            Theme.of(context).textTheme,
-          ),
+      debugShowCheckedModeBanner: false,
+      theme: ThemeData(
+        textTheme: GoogleFonts.poppinsTextTheme(
+          Theme.of(context).textTheme,
         ),
-        title: 'Flutter Demo',
-        // home: LoginPage(),
-        // home: SignupPage(),
-        // home: DashboardPage(),
-        // home: DetailStudioPage(),
-        // home: BookingPage(),
-        // home: HistoryPage(),
-        // home: ReviewPage(),
-        home: CreateReviewPage());
+      ),
+      title: 'Flutter Demo',
+      // home: LoginPage(),
+      // home: SignupPage(),
+      // home: DashboardPage(),
+      // home: DetailStudioPage(),
+      // home: BookingPage(),
+      // home: HistoryPage(),
+      // home: ReviewPage(),
+      // home: CreateReviewPage()
+      home: EditProfilePage(),
+    );
   }
 }
 
