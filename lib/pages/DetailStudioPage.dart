@@ -210,7 +210,7 @@ class _DetailStudioPageState extends State<DetailStudioPage> {
           ],
         )),
         bottomNavigationBar: ConstrainedBox(
-          constraints: new BoxConstraints(maxHeight: 90),
+          constraints: new BoxConstraints(maxHeight: 125),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
@@ -220,10 +220,11 @@ class _DetailStudioPageState extends State<DetailStudioPage> {
                   padding: EdgeInsets.all(8),
                   color: Colors.white,
                   child: Row(
-                    crossAxisAlignment: CrossAxisAlignment.start,
+                    crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
                       Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           Text(
                             "Total Price",
