@@ -80,7 +80,7 @@ class _SignupPageState extends State<SignupPage> {
                                   style: ElevatedButton.styleFrom(
                                       padding: const EdgeInsets.symmetric(
                                           vertical: 18),
-                                      backgroundColor: HexColor("#291F45"),
+                                      backgroundColor: Colors.deepPurple,
                                       shadowColor: Colors.white,
                                       shape: RoundedRectangleBorder(
                                           borderRadius:
@@ -88,19 +88,12 @@ class _SignupPageState extends State<SignupPage> {
                                   onPressed: () {},
                                   child: const Text(
                                     "Signup",
-                                    style:
-                                        TextStyle(fontWeight: FontWeight.w600),
+                                    style: TextStyle(
+                                        color: Colors.white,
+                                        fontWeight: FontWeight.w600),
                                   )))
                         ]),
                         const SizedBox(height: 15),
-                        const Center(
-                          child: Text(
-                            "Or",
-                            textAlign: TextAlign.center,
-                            style: TextStyle(fontWeight: FontWeight.w600),
-                          ),
-                        ),
-                        const SizedBox(height: 12),
                         Row(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
@@ -110,7 +103,9 @@ class _SignupPageState extends State<SignupPage> {
                                 style: TextStyle(fontWeight: FontWeight.w700),
                               ),
                               TextButton(
-                                  onPressed: () {},
+                                  onPressed: () {
+                                    Navigator.pushNamed(context, '/login');
+                                  },
                                   child: Text(
                                     "Sign in",
                                     style: TextStyle(

@@ -17,6 +17,7 @@ class AuthServices {
       }
 
       await prefs.setString('token', obj['token']);
+      await prefs.setBool('isLogin', obj['status']);
 
       return obj;
     } catch (e) {

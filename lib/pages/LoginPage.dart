@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:hexcolor/hexcolor.dart';
+import 'package:rent_mobileapps/pages/SignupPage.dart';
 import 'package:rent_mobileapps/sevices/AuthServices.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -44,7 +45,7 @@ class _LoginPageState extends State<LoginPage> {
             width: double.maxFinite,
             height: double.maxFinite,
             color: Colors.white,
-            child: PageView(
+            child: ListView(
               children: [
                 Container(
                     margin: const EdgeInsets.only(top: 70),
@@ -129,7 +130,7 @@ class _LoginPageState extends State<LoginPage> {
                                         setState(() {
                                           loading = false;
                                         });
-                                        print(login);
+
                                         if (login['status']) {
                                           emailValue.clear();
                                           passwordValue.clear();
@@ -152,6 +153,7 @@ class _LoginPageState extends State<LoginPage> {
                                               ),
                                             );
                                           } else {
+                                            getToken();
                                             showDialog<String>(
                                               context: context,
                                               builder: (BuildContext context) =>
@@ -171,6 +173,7 @@ class _LoginPageState extends State<LoginPage> {
                                             );
                                           }
                                           print("Login Successfully");
+                                          Navigator.pushNamed(context, '/');
                                         } else {
                                           showDialog<String>(
                                             context: context,
@@ -192,12 +195,33 @@ class _LoginPageState extends State<LoginPage> {
                                         }
                                       },
                                       child: Text(
-                                        loading ? "Loading" : "Login",
+                                        loading ? "Loading" : "Sign in",
                                         style: const TextStyle(
                                             color: Colors.white,
                                             fontWeight: FontWeight.w600),
                                       )))
-                            ])
+                            ]),
+                            const SizedBox(height: 15),
+                            Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  const Text(
+                                    "Don't have an account? ",
+                                    textAlign: TextAlign.center,
+                                    style:
+                                        TextStyle(fontWeight: FontWeight.w700),
+                                  ),
+                                  TextButton(
+                                      onPressed: () {
+                                        Navigator.pushNamed(context, '/signup');
+                                      },
+                                      child: Text(
+                                        "Sign up",
+                                        style: TextStyle(
+                                            color: HexColor('#291F45'),
+                                            fontWeight: FontWeight.bold),
+                                      ))
+                                ])
                           ],
                         ),
                       ),
