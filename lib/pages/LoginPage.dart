@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:hexcolor/hexcolor.dart';
+import 'package:rent_mobileapps/sevices/AuthServices.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class LoginPage extends StatefulWidget {
   LoginPage({super.key});
@@ -10,8 +12,32 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
+  String token = "";
   List<MaterialColor> colors = [Colors.amber, Colors.blue, Colors.grey];
+  bool loading = false;
+
+  TextEditingController emailValue = TextEditingController();
+  TextEditingController passwordValue = TextEditingController();
+
+  getToken() async {
+    final SharedPreferences prefs = await SharedPreferences.getInstance();
+    setState(() {
+      token = prefs.getString("token")!;
+    });
+  }
+
   @override
+  void dispose() {
+    emailValue.dispose();
+    passwordValue.dispose();
+    super.dispose();
+  }
+
+  void initState() {
+    super.initState();
+    getToken();
+  }
+
   Widget build(BuildContext context) {
     return Scaffold(
         body: Container(
@@ -43,8 +69,9 @@ class _LoginPageState extends State<LoginPage> {
                                 )),
                             const Text("Login with your account..."),
                             const SizedBox(height: 20),
-                            const TextField(
-                              decoration: InputDecoration(
+                            TextField(
+                              controller: emailValue,
+                              decoration: const InputDecoration(
                                   border: UnderlineInputBorder(
                                     borderSide: BorderSide(color: Colors.black),
                                   ),
@@ -58,11 +85,12 @@ class _LoginPageState extends State<LoginPage> {
                                   )),
                             ),
                             const SizedBox(height: 15),
-                            const Padding(
-                              padding: EdgeInsets.all(0),
+                            Padding(
+                              padding: const EdgeInsets.all(0),
                               child: TextField(
                                 obscureText: true,
-                                decoration: InputDecoration(
+                                controller: passwordValue,
+                                decoration: const InputDecoration(
                                   border: UnderlineInputBorder(
                                       borderSide:
                                           BorderSide(color: Colors.black)),
@@ -84,15 +112,89 @@ class _LoginPageState extends State<LoginPage> {
                                       style: ElevatedButton.styleFrom(
                                           padding: const EdgeInsets.symmetric(
                                               vertical: 18),
-                                          backgroundColor: HexColor("#291F45"),
+                                          backgroundColor: Colors.deepPurple,
                                           shadowColor: Colors.white,
                                           shape: RoundedRectangleBorder(
                                               borderRadius:
                                                   BorderRadius.circular(100))),
-                                      onPressed: () {},
-                                      child: const Text(
-                                        "Login",
-                                        style: TextStyle(
+                                      onPressed: () async {
+                                        setState(() {
+                                          loading = true;
+                                        });
+
+                                        var login = await AuthServices().login(
+                                            email: emailValue.text,
+                                            password: passwordValue.text);
+
+                                        setState(() {
+                                          loading = false;
+                                        });
+                                        print(login);
+                                        if (login['status']) {
+                                          emailValue.clear();
+                                          passwordValue.clear();
+                                          if (login['data']['role'] != "user") {
+                                            showDialog<String>(
+                                              context: context,
+                                              builder: (BuildContext context) =>
+                                                  AlertDialog(
+                                                title: Text('Failed'),
+                                                content:
+                                                    Text('You are not user!'),
+                                                actions: [
+                                                  TextButton(
+                                                    onPressed: () =>
+                                                        Navigator.pop(
+                                                            context, 'OK'),
+                                                    child: const Text('OK'),
+                                                  ),
+                                                ],
+                                              ),
+                                            );
+                                          } else {
+                                            showDialog<String>(
+                                              context: context,
+                                              builder: (BuildContext context) =>
+                                                  AlertDialog(
+                                                title: Text('Success'),
+                                                content:
+                                                    Text('Login Successfully'),
+                                                actions: [
+                                                  TextButton(
+                                                    onPressed: () =>
+                                                        Navigator.pop(
+                                                            context, 'OK'),
+                                                    child: const Text('OK'),
+                                                  ),
+                                                ],
+                                              ),
+                                            );
+                                          }
+                                          print("Login Successfully");
+                                        } else {
+                                          showDialog<String>(
+                                            context: context,
+                                            builder: (BuildContext context) =>
+                                                AlertDialog(
+                                              title: Text('Failed'),
+                                              content: Text('Login Failed'),
+                                              actions: [
+                                                TextButton(
+                                                  onPressed: () =>
+                                                      Navigator.pop(
+                                                          context, 'OK'),
+                                                  child: const Text('OK'),
+                                                ),
+                                              ],
+                                            ),
+                                          );
+                                          print("Login Failed.");
+                                        }
+                                      },
+                                      child: Text(
+                                        loading ? "Loading" : "Login",
+                                        style: const TextStyle(
+                                            color: Colors.white,
                                             fontWeight: FontWeight.w600),
                                       )))
                             ])

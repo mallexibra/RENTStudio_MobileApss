@@ -18,6 +18,9 @@ class _BarNavigationState extends State<BarNavigation> {
         backgroundColor: Colors.deepPurple,
         padding: EdgeInsets.all(8),
         gap: 8,
+        onTabChange: (index) {
+          print("Nanas cantik!");
+        },
         color: Colors.deepPurple[200],
         activeColor: Colors.white,
         tabBackgroundColor: Color.fromARGB(255, 124, 86, 192),
