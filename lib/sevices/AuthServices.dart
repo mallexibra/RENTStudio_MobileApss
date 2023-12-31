@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:dio/dio.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -38,15 +40,20 @@ class AuthServices {
           data: {"email": email, "password": password});
 
       Map obj = response.data;
+      print(obj);
       if (!obj['status']) {
         return obj;
       }
 
+      final data = jsonEncode(obj['data']);
+
+      await prefs.setString('user', data);
       await prefs.setString('token', obj['token']);
       await prefs.setBool('isLogin', obj['status']);
 
       return obj;
     } catch (e) {
+      print(e.toString());
       return {"message": e.toString()};
     }
   }

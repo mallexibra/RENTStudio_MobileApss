@@ -152,6 +152,7 @@ class _LoginPageState extends State<LoginPage> {
                                                 ],
                                               ),
                                             );
+                                            return;
                                           } else {
                                             getToken();
                                             showDialog<String>(
