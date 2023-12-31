@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
+import 'package:rent_mobileapps/sevices/AuthServices.dart';
 
 class BarNavigation extends StatefulWidget {
   final int index;
@@ -48,8 +49,24 @@ class _BarNavigationState extends State<BarNavigation> {
           GButton(
             icon: Icons.logout_rounded,
             text: "Logout",
-            onPressed: () {
-              Navigator.pushNamed(context, '/login');
+            onPressed: () async {
+              bool status = await AuthServices().logout();
+              if (status) {
+                showDialog<String>(
+                  context: context,
+                  builder: (BuildContext context) => AlertDialog(
+                    title: Text('Success'),
+                    content: Text('Logout Successfully'),
+                    actions: [
+                      TextButton(
+                        onPressed: () => Navigator.pop(context, 'OK'),
+                        child: const Text('OK'),
+                      ),
+                    ],
+                  ),
+                );
+                Navigator.pushNamed(context, '/login');
+              }
             },
           ),
         ],

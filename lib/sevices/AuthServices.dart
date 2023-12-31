@@ -3,11 +3,12 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 class AuthServices {
   final dio = Dio();
+  final url = "http://localhost:8000/api";
 
   Future<Map> login({required String email, required String password}) async {
     try {
       final SharedPreferences prefs = await SharedPreferences.getInstance();
-      var response = await dio.post("http://localhost:8000/api/login",
+      var response = await dio.post("$url/login",
           options: Options(headers: {"Content-Type": "application/json"}),
           data: {"email": email, "password": password});
 
@@ -22,6 +23,28 @@ class AuthServices {
       return obj;
     } catch (e) {
       return {"message": e.toString()};
+    }
+  }
+
+  Future<bool> logout() async {
+    try {
+      final SharedPreferences prefs = await SharedPreferences.getInstance();
+      final token = prefs.getString('token');
+      var response = await dio.get("$url/logout",
+          options: Options(headers: {
+            "Content-Type": "application/json",
+            "Authorization": "Bearer $token"
+          }));
+
+      if (response.data['status']) {
+        await prefs.clear();
+        return true;
+      } else {
+        return false;
+      }
+    } catch (e) {
+      print(e.toString());
+      return false;
     }
   }
 }
