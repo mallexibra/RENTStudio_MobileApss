@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:hexcolor/hexcolor.dart';
+import 'package:rent_mobileapps/sevices/AuthServices.dart';
 
 class SignupPage extends StatefulWidget {
   SignupPage({super.key});
@@ -11,6 +12,11 @@ class SignupPage extends StatefulWidget {
 
 class _SignupPageState extends State<SignupPage> {
   List<MaterialColor> colors = [Colors.amber, Colors.blue, Colors.grey];
+
+  TextEditingController name = TextEditingController();
+  TextEditingController email = TextEditingController();
+  TextEditingController password = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -42,7 +48,26 @@ class _SignupPageState extends State<SignupPage> {
                             )),
                         const Text("Signup your account..."),
                         const SizedBox(height: 20),
-                        const TextField(
+                        Padding(
+                          padding: EdgeInsets.all(0),
+                          child: TextField(
+                            controller: name,
+                            decoration: InputDecoration(
+                              border: UnderlineInputBorder(
+                                  borderSide: BorderSide(color: Colors.black)),
+                              focusedBorder: UnderlineInputBorder(
+                                  borderSide: BorderSide(color: Colors.black)),
+                              hintText: "Full Name",
+                              prefixIcon: Icon(
+                                Icons.person,
+                                color: Colors.deepPurple,
+                              ),
+                            ),
+                          ),
+                        ),
+                        const SizedBox(height: 15),
+                        TextField(
+                          controller: email,
                           decoration: InputDecoration(
                               border: UnderlineInputBorder(
                                 borderSide: BorderSide(color: Colors.black),
@@ -56,10 +81,11 @@ class _SignupPageState extends State<SignupPage> {
                               )),
                         ),
                         const SizedBox(height: 15),
-                        const Padding(
+                        Padding(
                           padding: EdgeInsets.all(0),
                           child: TextField(
                             obscureText: true,
+                            controller: password,
                             decoration: InputDecoration(
                               border: UnderlineInputBorder(
                                   borderSide: BorderSide(color: Colors.black)),
@@ -85,7 +111,51 @@ class _SignupPageState extends State<SignupPage> {
                                       shape: RoundedRectangleBorder(
                                           borderRadius:
                                               BorderRadius.circular(100))),
-                                  onPressed: () {},
+                                  onPressed: () async {
+                                    bool status = await AuthServices().register(
+                                        name: name.text,
+                                        email: email.text,
+                                        password: password.text);
+
+                                    if (status) {
+                                      showDialog<String>(
+                                        context: context,
+                                        builder: (BuildContext context) =>
+                                            AlertDialog(
+                                          title: Text('Success'),
+                                          content: Text(
+                                              'Register user successfully'),
+                                          actions: [
+                                            TextButton(
+                                              child: const Text('OK'),
+                                              onPressed: () {
+                                                Navigator.pop(context, 'OK');
+                                                Navigator.pushNamed(
+                                                    context, '/login');
+                                              },
+                                            ),
+                                          ],
+                                        ),
+                                      );
+                                    } else {
+                                      showDialog<String>(
+                                        context: context,
+                                        builder: (BuildContext context) =>
+                                            AlertDialog(
+                                          title: Text('Failed'),
+                                          content:
+                                              Text('Register user failed!'),
+                                          actions: [
+                                            TextButton(
+                                              onPressed: () =>
+                                                  Navigator.pop(context, 'OK'),
+                                              child: const Text('OK'),
+                                            ),
+                                          ],
+                                        ),
+                                      );
+                                    }
+                                  },
                                   child: const Text(
                                     "Signup",
                                     style: TextStyle(

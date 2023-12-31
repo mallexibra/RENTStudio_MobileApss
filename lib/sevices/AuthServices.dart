@@ -5,6 +5,31 @@ class AuthServices {
   final dio = Dio();
   final url = "http://localhost:8000/api";
 
+  Future<bool> register(
+      {required String name,
+      required String email,
+      required String password}) async {
+    try {
+      var response = await dio.post("$url/register",
+          data: {
+            "name": name,
+            "email": email,
+            "role": "user",
+            "password": password
+          },
+          options: Options(headers: {"Content-Type": "application/json"}));
+
+      if (response.data['status']) {
+        return true;
+      } else {
+        return false;
+      }
+    } catch (e) {
+      print(e.toString());
+      return false;
+    }
+  }
+
   Future<Map> login({required String email, required String password}) async {
     try {
       final SharedPreferences prefs = await SharedPreferences.getInstance();
