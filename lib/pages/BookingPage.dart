@@ -191,7 +191,7 @@ class _BookingPageState extends State<BookingPage> {
           )
         ],
       )),
-      bottomNavigationBar: BarNavigation(),
+      bottomNavigationBar: BarNavigation(index: 0,),
     );
   }
 }

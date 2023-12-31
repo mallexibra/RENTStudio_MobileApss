@@ -132,7 +132,9 @@ class _HistoryPageState extends State<HistoryPage> {
           ))
         ],
       )),
-      bottomNavigationBar: BarNavigation(),
+      bottomNavigationBar: BarNavigation(
+        index: 1,
+      ),
     );
   }
 }

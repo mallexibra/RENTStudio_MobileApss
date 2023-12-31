@@ -105,7 +105,9 @@ class _CreateReviewPageState extends State<CreateReviewPage> {
           )
         ],
       )),
-      bottomNavigationBar: BarNavigation(),
+      bottomNavigationBar: BarNavigation(
+        index: 1,
+      ),
     );
   }
 }

@@ -275,7 +275,7 @@ class _DashboardPageState extends State<DashboardPage> {
           ],
         ),
       ),
-      bottomNavigationBar: BarNavigation(),
+      bottomNavigationBar: BarNavigation(index: 0),
     );
   }
 }

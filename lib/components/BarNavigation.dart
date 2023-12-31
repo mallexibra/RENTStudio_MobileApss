@@ -2,7 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
 
 class BarNavigation extends StatefulWidget {
-  const BarNavigation({super.key});
+  final int index;
+  const BarNavigation({required this.index});
 
   @override
   State<BarNavigation> createState() => _BarNavigationState();
@@ -18,9 +19,7 @@ class _BarNavigationState extends State<BarNavigation> {
         backgroundColor: Colors.deepPurple,
         padding: EdgeInsets.all(8),
         gap: 8,
-        onTabChange: (index) {
-          print("Nanas cantik!");
-        },
+        selectedIndex: widget.index,
         color: Colors.deepPurple[200],
         activeColor: Colors.white,
         tabBackgroundColor: Color.fromARGB(255, 124, 86, 192),
@@ -28,18 +27,30 @@ class _BarNavigationState extends State<BarNavigation> {
           GButton(
             icon: Icons.home_rounded,
             text: "Home",
+            onPressed: () {
+              Navigator.pushNamed(context, '/');
+            },
           ),
           GButton(
             icon: Icons.payments_rounded,
             text: "Payments",
+            onPressed: () {
+              Navigator.pushNamed(context, '/history');
+            },
           ),
           GButton(
             icon: Icons.star_outline_rounded,
             text: "Review",
+            onPressed: () {
+              Navigator.pushNamed(context, '/review');
+            },
           ),
           GButton(
             icon: Icons.logout_rounded,
             text: "Logout",
+            onPressed: () {
+              Navigator.pushNamed(context, '/login');
+            },
           ),
         ],
       ),

@@ -262,7 +262,7 @@ class _DetailStudioPageState extends State<DetailStudioPage> {
                       ),
                     ],
                   )),
-              BarNavigation()
+              BarNavigation(index: 1,)
             ],
           ),
         ));

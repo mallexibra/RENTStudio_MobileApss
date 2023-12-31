@@ -201,7 +201,9 @@ class _EditProfilePageState extends State<EditProfilePage> {
           )
         ],
       )),
-      bottomNavigationBar: BarNavigation(),
+      bottomNavigationBar: BarNavigation(
+        index: 1,
+      ),
     );
   }
 }

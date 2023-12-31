@@ -82,7 +82,9 @@ class _ReviewPageState extends State<ReviewPage> {
           ))
         ],
       )),
-      bottomNavigationBar: BarNavigation(),
+      bottomNavigationBar: BarNavigation(
+        index: 2,
+      ),
     );
   }
 }
