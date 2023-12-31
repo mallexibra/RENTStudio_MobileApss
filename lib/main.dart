@@ -14,7 +14,6 @@ import 'package:shared_preferences/shared_preferences.dart';
 Future<void> main() async {
   SharedPreferences prefs = await SharedPreferences.getInstance();
   var isLogin = await prefs.getBool('isLogin');
-  print(isLogin);
   runApp(MyApp(
     status: isLogin ?? false,
   ));

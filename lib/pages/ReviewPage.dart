@@ -12,6 +12,7 @@ class ReviewPage extends StatefulWidget {
 class _ReviewPageState extends State<ReviewPage> {
   @override
   Widget build(BuildContext context) {
+    double c_width = MediaQuery.of(context).size.width * 0.75;
     return Scaffold(
       body: Layout(
           child: Column(
@@ -71,7 +72,12 @@ class _ReviewPageState extends State<ReviewPage> {
                               Text("4")
                             ],
                           ),
-                          Text("Wah studionya bagus banget dan bersih juga")
+                          Container(
+                            width: c_width,
+                            child: Text(
+                              "Wah studionya bagus banget dan bersih juga",
+                            ),
+                          ),
                         ],
                       )
                     ],
