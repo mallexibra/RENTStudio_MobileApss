@@ -14,8 +14,8 @@ class DashboardPage extends StatefulWidget {
 }
 
 class _DashboardPageState extends State<DashboardPage> {
-  late var user;
   var studio = <dynamic>[];
+  var user;
   late String search;
 
   getUser() async {
@@ -178,7 +178,7 @@ class _DashboardPageState extends State<DashboardPage> {
             ),
             Expanded(
               child: ListView.builder(
-                  itemCount: studio.length ?? 0,
+                  itemCount: studio.length,
                   itemBuilder: (_, index) {
                     String name = studio[index]['nama']!;
                     String location = studio[index]['lokasi']!;
