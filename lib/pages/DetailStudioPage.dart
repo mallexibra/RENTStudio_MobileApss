@@ -250,8 +250,10 @@ class _DetailStudioPageState extends State<DetailStudioPage> {
                   Expanded(
                     child: GestureDetector(
                       onTap: () {
-                        Navigator.pushNamed(context, '/booking',
-                            arguments: {'id': studio['id']});
+                        Navigator.pushNamed(context, '/booking', arguments: {
+                          'id': studio['id'],
+                          'harga': studio['harga']
+                        });
                       },
                       child: Container(
                         width: double.maxFinite,
