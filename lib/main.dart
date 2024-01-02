@@ -12,6 +12,7 @@ import 'package:rent_mobileapps/pages/CreateReviewPage.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 Future<void> main() async {
+  WidgetsFlutterBinding.ensureInitialized();
   SharedPreferences prefs = await SharedPreferences.getInstance();
   var isLogin = await prefs.getBool('isLogin');
 
@@ -30,6 +31,10 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         textTheme: GoogleFonts.poppinsTextTheme(
           Theme.of(context).textTheme,
+        ),
+        appBarTheme: AppBarTheme(
+          iconTheme:
+              IconThemeData(color: Colors.white), // Change back arrow color
         ),
       ),
       routes: {

@@ -1,11 +1,12 @@
 import 'dart:convert';
 
 import 'package:dio/dio.dart';
+import 'package:rent_mobileapps/sevices/Variables.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class AuthServices {
   final dio = Dio();
-  final url = "http://localhost:8000/api";
+  final url = Variables().url;
 
   Future<bool> register(
       {required String name,

@@ -180,6 +180,7 @@ class _DashboardPageState extends State<DashboardPage> {
               child: ListView.builder(
                   itemCount: studio.length,
                   itemBuilder: (_, index) {
+                    int id = studio[index]['id']!;
                     String name = studio[index]['nama']!;
                     String location = studio[index]['lokasi']!;
                     String deskripsi = studio[index]['deskripsi']!;
@@ -239,7 +240,8 @@ class _DashboardPageState extends State<DashboardPage> {
                           ),
                           GestureDetector(
                             onTap: () {
-                              print("Hello");
+                              Navigator.pushNamed(context, "/studio",
+                                  arguments: {'id': id});
                             },
                             child: Container(
                               width: double.maxFinite,
