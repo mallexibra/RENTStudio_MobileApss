@@ -86,7 +86,7 @@ class _DashboardPageState extends State<DashboardPage> {
                               color: Colors.white),
                           child: ClipRRect(
                               borderRadius: BorderRadius.circular(26),
-                              child: user['profile'] == null
+                              child: user['profile'] != null
                                   ? Image.network(
                                       user['profile'],
                                       fit: BoxFit.cover,

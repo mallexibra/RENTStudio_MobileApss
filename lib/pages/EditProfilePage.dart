@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:io';
 
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
@@ -15,7 +16,9 @@ class EditProfilePage extends StatefulWidget {
 }
 
 class _EditProfilePageState extends State<EditProfilePage> {
-  late var user;
+  var user;
+  File? profileImage;
+  String? profileName;
 
   TextEditingController name = TextEditingController();
   TextEditingController email = TextEditingController();
@@ -61,7 +64,7 @@ class _EditProfilePageState extends State<EditProfilePage> {
                 borderRadius: BorderRadius.circular(46)),
             child: ClipRRect(
                 borderRadius: BorderRadius.circular(46),
-                child: user['profile'] == null
+                child: user['profile'] != null
                     ? Image.network(
                         user['profile'],
                         fit: BoxFit.cover,
@@ -78,11 +81,8 @@ class _EditProfilePageState extends State<EditProfilePage> {
 
                 if (result != null) {
                   PlatformFile file = result.files.first;
-                  print(file.name);
-                  print(file.extension);
-                  print(file.path);
-                } else {
-                  // User canceled the picker
+                  profileImage = File(file.path!);
+                  profileName = file.name;
                 }
               },
               child: Container(
@@ -207,7 +207,9 @@ class _EditProfilePageState extends State<EditProfilePage> {
                     bool status = await AuthServices().editProfile(
                         name: name.text,
                         email: email.text,
-                        password: password.text);
+                        password: password.text,
+                        profile: profileImage,
+                        profileName: profileName);
 
                     if (status) {
                       showDialog<String>(

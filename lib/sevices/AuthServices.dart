@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:io';
 
 import 'package:dio/dio.dart';
 import 'package:rent_mobileapps/sevices/Variables.dart';
@@ -34,23 +35,36 @@ class AuthServices {
   }
 
   Future<bool> editProfile(
-      {required String name, required String email, String? password}) async {
+      {required String name,
+      required String email,
+      File? profile,
+      String? profileName,
+      String? password}) async {
     try {
       SharedPreferences prefs = await SharedPreferences.getInstance();
       final token = prefs.getString('token');
       final idUser = jsonDecode(prefs.getString('user')!)['id'];
 
+      var formData = FormData.fromMap({
+        "name": name,
+        "email": email,
+        "password": password,
+        "profile": profile != null
+            ? await MultipartFile.fromFile(profile.path, filename: profileName!)
+            : null,
+      });
+
       var response = await dio.post("$url/users/$idUser",
-          data: {"name": name, "email": email, "password": password},
+          data: formData,
           options: Options(headers: {
-            "Content-Type": "application/json",
+            "Content-Type": "multipart/form-data",
             "Authorization": "Bearer $token"
           }));
 
+      print(response.data);
       if (response.data['status']) {
         final data = {'id': idUser, ...response.data['data_edited']};
         final myData = jsonEncode(data);
-
         await prefs.setString('user', myData);
 
         return true;

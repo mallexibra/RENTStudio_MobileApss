@@ -35,18 +35,19 @@ class _HistoryPageState extends State<HistoryPage> {
   Widget build(BuildContext context) {
     double c_width = MediaQuery.of(context).size.width * 0.73;
     return Scaffold(
+      appBar: AppBar(
+        centerTitle: true,
+        backgroundColor: Colors.deepPurple,
+        automaticallyImplyLeading: false,
+        title: Text(
+          "History Payment",
+          style: TextStyle(color: Colors.white),
+        ),
+      ),
       body: Layout(
           child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text(
-            "History Payment",
-            style: TextStyle(
-                fontSize: 28,
-                fontWeight: FontWeight.bold,
-                color: Colors.deepPurple),
-          ),
-          SizedBox(height: 12),
           Expanded(
               child: ListView.builder(
                   itemCount: transaction.length,

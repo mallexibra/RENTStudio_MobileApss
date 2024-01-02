@@ -37,20 +37,19 @@ class _ReviewPageState extends State<ReviewPage> {
   Widget build(BuildContext context) {
     double c_width = MediaQuery.of(context).size.width * 0.75;
     return Scaffold(
+      appBar: AppBar(
+        centerTitle: true,
+        backgroundColor: Colors.deepPurple,
+        automaticallyImplyLeading: false,
+        title: Text(
+          "Your Review Studio",
+          style: TextStyle(color: Colors.white),
+        ),
+      ),
       body: Layout(
           child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text(
-            "Your Review Studio",
-            style: TextStyle(
-                fontSize: 28,
-                fontWeight: FontWeight.bold,
-                color: Colors.deepPurple),
-          ),
-          SizedBox(
-            height: 12,
-          ),
           Expanded(
               child: ListView.builder(
                   itemCount: reviews.length,
