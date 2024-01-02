@@ -250,17 +250,37 @@ class _DetailStudioPageState extends State<DetailStudioPage> {
                   Expanded(
                     child: GestureDetector(
                       onTap: () {
-                        Navigator.pushNamed(context, '/booking', arguments: {
-                          'id': studio['id'],
-                          'harga': studio['harga']
-                        });
+                        if (studio['status'] != 'dipinjam') {
+                          Navigator.pushNamed(context, '/booking', arguments: {
+                            'id': studio['id'],
+                            'harga': studio['harga']
+                          });
+                        } else {
+                          showDialog<String>(
+                            context: context,
+                            builder: (BuildContext context) => AlertDialog(
+                              title: Text('Failed'),
+                              content: Text('Studio masih dipinjam bosss'),
+                              actions: [
+                                TextButton(
+                                  onPressed: () {
+                                    Navigator.pop(context, 'OK');
+                                  },
+                                  child: const Text('OK'),
+                                ),
+                              ],
+                            ),
+                          );
+                        }
                       },
                       child: Container(
                         width: double.maxFinite,
                         padding: EdgeInsets.all(8),
                         decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(8),
-                            color: Colors.deepPurple),
+                            color: studio['status'] != 'dipinjam'
+                                ? Colors.deepPurple
+                                : Colors.deepPurple[300]),
                         child: Text(
                           "Booking Now",
                           textAlign: TextAlign.center,
