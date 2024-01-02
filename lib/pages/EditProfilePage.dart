@@ -46,7 +46,7 @@ class _EditProfilePageState extends State<EditProfilePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Layout(
-          child: Column(
+          child: ListView(
         children: [
           Text(
             "Edit Profile",
