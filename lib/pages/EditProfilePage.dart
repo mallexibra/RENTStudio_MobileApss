@@ -1,7 +1,11 @@
+import 'dart:convert';
+
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:rent_mobileapps/components/BarNavigation.dart';
 import 'package:rent_mobileapps/components/Layout.dart';
+import 'package:rent_mobileapps/sevices/AuthServices.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class EditProfilePage extends StatefulWidget {
   const EditProfilePage({super.key});
@@ -11,6 +15,30 @@ class EditProfilePage extends StatefulWidget {
 }
 
 class _EditProfilePageState extends State<EditProfilePage> {
+  late var user;
+
+  TextEditingController name = TextEditingController();
+  TextEditingController email = TextEditingController();
+  TextEditingController password = TextEditingController();
+
+  getUser() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+
+    final data = jsonDecode(prefs.getString('user')!) as Map<String, dynamic>;
+
+    user = data;
+
+    setState(() {
+      name.text = data['name'];
+      email.text = data['email'];
+    });
+  }
+
+  @override
+  void initState() {
+    getUser();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -28,13 +56,20 @@ class _EditProfilePageState extends State<EditProfilePage> {
           Container(
             width: 92,
             height: 92,
+            decoration: BoxDecoration(
+                border: Border.all(width: 2, color: Colors.deepPurple),
+                borderRadius: BorderRadius.circular(46)),
             child: ClipRRect(
-              borderRadius: BorderRadius.circular(46),
-              child: Image.network(
-                "https://images.unsplash.com/photo-1504593811423-6dd665756598?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTh8fHBlcnNvbnxlbnwwfHwwfHx8MA%3D%3D",
-                fit: BoxFit.cover,
-              ),
-            ),
+                borderRadius: BorderRadius.circular(46),
+                child: user['profile'] == null
+                    ? Image.network(
+                        user['profile'],
+                        fit: BoxFit.cover,
+                      )
+                    : Image.asset(
+                        'images/user.png',
+                        fit: BoxFit.cover,
+                      )),
           ),
           GestureDetector(
               onTap: () async {
@@ -88,6 +123,7 @@ class _EditProfilePageState extends State<EditProfilePage> {
                     height: 4,
                   ),
                   TextField(
+                    controller: name,
                     decoration: InputDecoration(
                         hintText: "Nama Lengkap",
                         contentPadding:
@@ -117,6 +153,7 @@ class _EditProfilePageState extends State<EditProfilePage> {
                     height: 4,
                   ),
                   TextField(
+                    controller: email,
                     decoration: InputDecoration(
                         hintText: "Email",
                         contentPadding:
@@ -146,6 +183,7 @@ class _EditProfilePageState extends State<EditProfilePage> {
                     height: 4,
                   ),
                   TextField(
+                    controller: password,
                     decoration: InputDecoration(
                         hintText: "Password",
                         contentPadding:
@@ -165,7 +203,33 @@ class _EditProfilePageState extends State<EditProfilePage> {
                 height: 12,
               ),
               GestureDetector(
-                  onTap: () {},
+                  onTap: () async {
+                    bool status = await AuthServices().editProfile(
+                        name: name.text,
+                        email: email.text,
+                        password: password.text);
+
+                    if (status) {
+                      showDialog<String>(
+                        context: context,
+                        builder: (BuildContext context) => AlertDialog(
+                          title: Text('Success'),
+                          content: Text('Success edit profile!'),
+                          actions: [
+                            TextButton(
+                              onPressed: () {
+                                Navigator.pop(context, 'OK');
+                                Navigator.pushNamed(context, '/');
+                              },
+                              child: const Text('OK'),
+                            ),
+                          ],
+                        ),
+                      );
+                    } else {
+                      print("OK!");
+                    }
+                  },
                   child: Container(
                     width: double.maxFinite,
                     padding: EdgeInsets.all(8),
@@ -183,7 +247,9 @@ class _EditProfilePageState extends State<EditProfilePage> {
                 height: 12,
               ),
               GestureDetector(
-                  onTap: () {},
+                  onTap: () {
+                    Navigator.pushNamed(context, '/');
+                  },
                   child: Container(
                     width: double.maxFinite,
                     padding: EdgeInsets.all(8),
@@ -201,9 +267,6 @@ class _EditProfilePageState extends State<EditProfilePage> {
           )
         ],
       )),
-      bottomNavigationBar: BarNavigation(
-        index: 1,
-      ),
     );
   }
 }

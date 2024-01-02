@@ -32,15 +32,45 @@ class AuthServices {
     }
   }
 
+  Future<bool> editProfile(
+      {required String name, required String email, String? password}) async {
+    try {
+      SharedPreferences prefs = await SharedPreferences.getInstance();
+      final token = prefs.getString('token');
+      final idUser = jsonDecode(prefs.getString('user')!)['id'];
+
+      var response = await dio.post("$url/users/$idUser",
+          data: {"name": name, "email": email, "password": password},
+          options: Options(headers: {
+            "Content-Type": "application/json",
+            "Authorization": "Bearer $token"
+          }));
+
+      if (response.data['status']) {
+        final data = {'id': idUser, ...response.data['data_edited']};
+        final myData = jsonEncode(data);
+
+        await prefs.setString('user', myData);
+
+        return true;
+      } else {
+        return false;
+      }
+    } catch (e) {
+      print(e.toString());
+      return false;
+    }
+  }
+
   Future<Map> login({required String email, required String password}) async {
     try {
       final SharedPreferences prefs = await SharedPreferences.getInstance();
+
       var response = await dio.post("$url/login",
           options: Options(headers: {"Content-Type": "application/json"}),
           data: {"email": email, "password": password});
 
       Map obj = response.data;
-      print(obj);
       if (!obj['status']) {
         return obj;
       }

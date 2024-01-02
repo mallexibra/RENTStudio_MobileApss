@@ -11,8 +11,9 @@ class ReviewServices {
     try {
       SharedPreferences prefs = await SharedPreferences.getInstance();
       final token = prefs.getString('token');
+      final id = jsonDecode(prefs.getString('user')!)['id'];
 
-      var response = await dio.get("$url/reviews?id-user=1",
+      var response = await dio.get("$url/reviews?id-user=$id",
           options: Options(headers: {
             "Content-Type": "application/json",
             "Authorization": "Bearer $token"

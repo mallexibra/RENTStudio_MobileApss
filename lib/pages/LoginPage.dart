@@ -135,6 +135,7 @@ class _LoginPageState extends State<LoginPage> {
                                           emailValue.clear();
                                           passwordValue.clear();
                                           if (login['data']['role'] != "user") {
+                                            await AuthServices().logout();
                                             showDialog<String>(
                                               context: context,
                                               builder: (BuildContext context) =>

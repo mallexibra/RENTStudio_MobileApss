@@ -11,8 +11,9 @@ class TransactionServices {
     try {
       SharedPreferences prefs = await SharedPreferences.getInstance();
       var token = prefs.getString('token');
+      final id = jsonDecode(prefs.getString('user')!)['id'];
 
-      var response = await dio.get("$url/transaksi?id-user=1",
+      var response = await dio.get("$url/transaksi?id-user=$id",
           options: Options(headers: {
             "Content-Type": "application/json",
             "Authorization": "Bearer $token"
