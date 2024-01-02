@@ -34,4 +34,31 @@ class TransactionServices {
       return false;
     }
   }
+
+  finishTransaction(String idTransaksi) async {
+    try {
+      SharedPreferences prefs = await SharedPreferences.getInstance();
+      var token = prefs.getString('token');
+
+      var response = await dio.post("$url/transaksi/$idTransaksi",
+          data: {
+            'status': 'finished',
+          },
+          options: Options(headers: {
+            "Content-Type": "application/json",
+            "Authorization": "Bearer $token"
+          }));
+
+      Map obj = response.data;
+
+      if (obj['status']) {
+        return true;
+      } else {
+        return false;
+      }
+    } catch (e) {
+      print(e.toString());
+      return false;
+    }
+  }
 }

@@ -1,7 +1,12 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:rent_mobileapps/components/BarNavigation.dart';
 import 'package:rent_mobileapps/components/Layout.dart';
+import 'package:rent_mobileapps/sevices/ReviewServices.dart';
+import 'package:rent_mobileapps/sevices/StudioServices.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class CreateReviewPage extends StatefulWidget {
   const CreateReviewPage({super.key});
@@ -11,21 +16,59 @@ class CreateReviewPage extends StatefulWidget {
 }
 
 class _CreateReviewPageState extends State<CreateReviewPage> {
+  int id = 0;
+  int idTransaksi = 0;
+  Map studio = {};
+  late String idUser;
+  late String rate;
+
+  TextEditingController deksripsi = TextEditingController();
+
+  Future<void> getStudio() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    final data = await StudioServices().getDetailStudio(id: id);
+
+    setState(() {
+      studio = data;
+      idUser = jsonDecode(prefs.getString('user')!)['id'].toString();
+    });
+  }
+
+  @override
+  void initState() {
+    super.initState();
+
+    Future.delayed(Duration.zero, () {
+      final arguments = ModalRoute.of(context)?.settings.arguments;
+      if (arguments is Map<String, dynamic> && arguments.containsKey('id')) {
+        id = arguments['id'];
+        idTransaksi = arguments['idTransaksi'];
+        getStudio();
+      } else {
+        Navigator.pushNamed(context, '/');
+      }
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        centerTitle: true,
+        backgroundColor: Colors.deepPurple,
+        title: Text(
+          "Give a feedback",
+          style: TextStyle(color: Colors.white),
+        ),
+      ),
       body: Layout(
           child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
+        crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          const Text(
-            "History Payment",
-            style: TextStyle(
-                fontSize: 28,
-                fontWeight: FontWeight.bold,
-                color: Colors.deepPurple),
+          Text(
+            "Silahkan beri feedback untuk ${studio['nama']}",
+            style: TextStyle(fontSize: 18, fontWeight: FontWeight.w700),
           ),
-          const Text("Silahkan beri review untuk RENT Studio"),
           const SizedBox(height: 24),
           Container(
             width: double.maxFinite,
@@ -50,7 +93,7 @@ class _CreateReviewPageState extends State<CreateReviewPage> {
                     color: Colors.amber,
                   ),
                   onRatingUpdate: (rating) {
-                    print(rating);
+                    rate = "$rating";
                   },
                 ),
                 const SizedBox(
@@ -68,6 +111,7 @@ class _CreateReviewPageState extends State<CreateReviewPage> {
                   child: TextField(
                     keyboardType: TextInputType.multiline,
                     maxLines: 4,
+                    controller: deksripsi,
                     decoration: InputDecoration(
                         contentPadding: const EdgeInsets.symmetric(
                             horizontal: 8, vertical: 4),
@@ -85,7 +129,50 @@ class _CreateReviewPageState extends State<CreateReviewPage> {
                   height: 12,
                 ),
                 GestureDetector(
-                  onTap: () {},
+                  onTap: () async {
+                    bool status = await ReviewServices().createReview(
+                        idUser,
+                        id.toString(),
+                        idTransaksi.toString(),
+                        rate,
+                        deksripsi.text);
+
+                    if (status) {
+                      showDialog<String>(
+                        context: context,
+                        builder: (BuildContext context) => AlertDialog(
+                          title: Text('Success'),
+                          content: Text(
+                              'Success give a feedback for ${studio['nama']}!'),
+                          actions: [
+                            TextButton(
+                              onPressed: () {
+                                Navigator.pop(context, 'OK');
+                                Navigator.pushNamed(context, '/review');
+                              },
+                              child: const Text('OK'),
+                            ),
+                          ],
+                        ),
+                      );
+                    } else {
+                      showDialog<String>(
+                        context: context,
+                        builder: (BuildContext context) => AlertDialog(
+                          title: Text('Failed'),
+                          content: Text('Something wrong!'),
+                          actions: [
+                            TextButton(
+                              onPressed: () {
+                                Navigator.pop(context, 'OK');
+                              },
+                              child: const Text('OK'),
+                            ),
+                          ],
+                        ),
+                      );
+                    }
+                  },
                   child: Container(
                     width: 250,
                     padding: EdgeInsets.all(8),
@@ -105,9 +192,6 @@ class _CreateReviewPageState extends State<CreateReviewPage> {
           )
         ],
       )),
-      bottomNavigationBar: BarNavigation(
-        index: 1,
-      ),
     );
   }
 }

@@ -154,7 +154,13 @@ class _HistoryPageState extends State<HistoryPage> {
                                 visible:
                                     transaction[index]['status'] == 'finish',
                                 child: GestureDetector(
-                                  onTap: () {},
+                                  onTap: () {
+                                    Navigator.pushNamed(
+                                        context, '/createreview', arguments: {
+                                      'id': transaction[index]['id_studio'],
+                                      'idTransaksi': transaction[index]['id']
+                                    });
+                                  },
                                   child: Container(
                                     // width: double.maxFinite,
                                     padding: EdgeInsets.symmetric(
