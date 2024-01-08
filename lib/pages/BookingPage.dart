@@ -228,13 +228,8 @@ class _BookingPageState extends State<BookingPage> {
                 ),
                 GestureDetector(
                   onTap: () async {
-                    bool status = await StudioServices().bookingStudio(
-                        idUser,
-                        id.toString(),
-                        pesan.text,
-                        bukti,
-                        nameBukti,
-                        price.text);
+                    bool status = await StudioServices().bookingStudio(idUser,
+                        id.toString(), pesan.text, bukti, nameBukti, harga);
 
                     if (status) {
                       showDialog<String>(
